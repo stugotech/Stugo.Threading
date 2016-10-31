@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <UsingTask TaskName="GitVersion" TaskFactory="CodeTaskFactory"
+             AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll" >
+    <ParameterGroup>
+      <VersionString ParameterType="System.String" Required="true" />
+      <MajorMinorVersion ParameterType="System.String" Output="true" />
+      <FullVersion ParameterType="System.String" Output="true" />
+    </ParameterGroup>
+    <Task>
+      <Using Namespace="System"/>
+      <Using Namespace="System.IO"/>
+      <Using Namespace="System.Text.RegularExpressions" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+          var match = Regex.Match(VersionString, @"^v?(?<major>\d+)\.(?<minor>\d+)(\.(?<patch>\d+))?(-(?<pre>[A-Za-z0-9]+))?-(?<revision>\d+)-(?<commit>[a-z0-9]+)$");
+          
+          string major = match.Groups["major"].Value,
+              minor = match.Groups["minor"].Value,
+              patch = match.Groups["patch"].Value,
+              pre = match.Groups["pre"].Value, 
+              commit = match.Groups["commit"].Value,
+              revision = match.Groups["revision"].Value;
+              
+          _MajorMinorVersion = major + "." + minor;
+          _FullVersion = _MajorMinorVersion + (!string.IsNullOrEmpty(patch) ? "." + patch : "")
+              + (!string.IsNullOrEmpty(pre) ? "-" + pre : "")
+              + "+" + commit + "." + revision;
+        ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+
+  <Target Name="CreateVersionInfo" BeforeTargets="CoreCompile">
+    <!-- call git and output result to "version.txt" -->
+    <Exec Command="git describe --long --abbrev=12 --first-parent > $(ProjectDir)version.txt" 
+          WorkingDirectory="$(SolutionDir)">
+      <Output TaskParameter="ExitCode" PropertyName="ExitCode" />
+    </Exec>
+    <Message Importance="high" Text="Calling git failed with exit code $(ExitCode)" 
+             Condition="'$(ExitCode)'!='0'" />
+
+    <!-- read "version.txt" and delete it -->
+    <ReadLinesFromFile File="$(ProjectDir)version.txt" Condition="'$(ExitCode)'=='0'">
+      <Output TaskParameter="Lines" ItemName="OutputLines"/>
+    </ReadLinesFromFile>
+    <Message Importance="High" Text="Version: @(OutputLines)" Condition="'$(ExitCode)'=='0'"/>
+    <Delete Condition="Exists('$(ProjectDir)version.txt')" Files="$(ProjectDir)version.txt"/>
+
+    <GitVersion VersionString="@(OutputLines)" Condition="'$(ExitCode)'=='0'">
+      <Output TaskParameter="FullVersion" PropertyName="FullVersion"/>
+      <Output TaskParameter="MajorMinorVersion" PropertyName="MajorMinorVersion"/>
+    </GitVersion>
+
+    <!-- write version info file -->
+    <WriteLinesToFile Overwrite="true" File="$(ProjectDir)Properties\VersionInfo.generated.cs" Encoding="UTF-8" 
+                      Lines='using System.Reflection%3B;[assembly: AssemblyVersion("$(MajorMinorVersion).*")];[assembly: AssemblyInformationalVersion("$(FullVersion)")]'/>
+  </Target>
+</Project>

@@ -1,0 +1,52 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stugo.Threading", "Stugo.Threading\Stugo.Threading.csproj", "{D7D38896-9D0B-4BC6-993D-FA6805B619DE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{1576C54E-1980-4C87-B160-3F094F9B12E9}"
+	ProjectSection(SolutionItems) = preProject
+		tools\GitVersion.targets = tools\GitVersion.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{27E6DD33-A911-4517-AB8B-50F98BCBF736}"
+	ProjectSection(SolutionItems) = preProject
+		tools\NuGet\NuGet.Config = tools\NuGet\NuGet.Config
+		tools\NuGet\NuGet.exe = tools\NuGet\NuGet.exe
+		tools\NuGet\NuGet.targets = tools\NuGet\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B0BB88ED-C3A4-4AF7-BFBF-F874697CDCF2}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		build.cmd = build.cmd
+		publish.cmd = publish.cmd
+		release.cmd = release.cmd
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stugo.Threading.Test", "Stugo.Threading.Test\Stugo.Threading.Test.csproj", "{C0AE5B71-A8BF-4CAF-AEFA-9C8A409B51EA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D7D38896-9D0B-4BC6-993D-FA6805B619DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7D38896-9D0B-4BC6-993D-FA6805B619DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7D38896-9D0B-4BC6-993D-FA6805B619DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7D38896-9D0B-4BC6-993D-FA6805B619DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0AE5B71-A8BF-4CAF-AEFA-9C8A409B51EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0AE5B71-A8BF-4CAF-AEFA-9C8A409B51EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0AE5B71-A8BF-4CAF-AEFA-9C8A409B51EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0AE5B71-A8BF-4CAF-AEFA-9C8A409B51EA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{27E6DD33-A911-4517-AB8B-50F98BCBF736} = {1576C54E-1980-4C87-B160-3F094F9B12E9}
+	EndGlobalSection
+EndGlobal
