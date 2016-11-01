@@ -1,0 +1,13 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Stugo.Threading</id>
+    <version>$version$</version>
+    <authors>Stugo Ltd</authors>
+    <description>Utility classes for threading and tasks.</description>
+    <copyright>Copyright (c) Stugo Ltd 2016</copyright>
+  </metadata>
+  <files>
+    <file src="bin\net45\*.*" target="lib\net45" />
+  </files>
+</package>

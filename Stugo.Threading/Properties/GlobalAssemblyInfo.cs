@@ -1,6 +1,6 @@
 using System.Reflection;
 
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Utility classes for threading and tasks")]
 [assembly: AssemblyCompany("Stugo Ltd")]
 [assembly: AssemblyProduct("Stugo.Threading")]
 [assembly: AssemblyCopyright("Copyright © Stugo Ltd 2016")]
