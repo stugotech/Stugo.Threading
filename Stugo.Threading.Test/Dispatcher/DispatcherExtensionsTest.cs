@@ -18,6 +18,7 @@ namespace Stugo.Threading.Test.Dispatcher
 
             var result = await dispatcherMock.Object.WaitResult(operation);
             Assert.Equal(42, result);
+            dispatcherMock.Verify(x => x.Enqueue(It.Is<TestOperation>(a => a == operation)), Times.Once);
         }
     }
 }
