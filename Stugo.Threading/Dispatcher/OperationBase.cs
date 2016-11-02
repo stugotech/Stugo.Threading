@@ -35,7 +35,7 @@ namespace Stugo.Threading.Dispatcher
 
 
 
-    public abstract class OperationBase<TResult> : OperationBase
+    public abstract class OperationBase<TResult> : OperationBase, IOperation<TResult>
     {
         private TResult result;
 

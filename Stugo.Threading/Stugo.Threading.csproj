@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dispatcher\DispatcherExtensions.cs" />
     <Compile Include="Dispatcher\IOperation.cs" />
     <Compile Include="Dispatcher\IOperationDispatcher.cs" />
     <Compile Include="Dispatcher\OperationBase.cs" />

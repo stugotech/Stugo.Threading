@@ -8,4 +8,10 @@ namespace Stugo.Threading.Dispatcher
         Task Completion { get; }
         bool HasExecuted { get; }
     }
+
+
+    public interface IOperation<out TResult> : IOperation
+    {
+        TResult Result { get; }
+    }
 }
