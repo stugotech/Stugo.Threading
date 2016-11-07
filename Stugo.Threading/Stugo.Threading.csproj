@@ -45,6 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Async\AsyncHelper.cs" />
+    <Compile Include="Async\AsyncMultiProducerSingleConsumerQueue.cs" />
+    <Compile Include="Async\AwaitableAutoResetEvent.cs" />
+    <Compile Include="Async\AwaitableCriticalSection.cs" />
+    <Compile Include="Async\AwaitableManualResetEvent.cs" />
     <Compile Include="Dispatcher\DispatcherExtensions.cs" />
     <Compile Include="Dispatcher\IOperation.cs" />
     <Compile Include="Dispatcher\IOperationDispatcher.cs" />

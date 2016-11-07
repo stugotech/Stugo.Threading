@@ -57,6 +57,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Async\AsyncMultiProducerSingleConsumerQueueTest.cs" />
     <Compile Include="Dispatcher\DispatcherExtensionsTest.cs" />
     <Compile Include="Dispatcher\OperationDispatcherTest.cs" />
     <Compile Include="Dispatcher\TestOperation.cs" />
