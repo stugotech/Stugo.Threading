@@ -6,7 +6,8 @@ namespace Stugo.Threading.Dispatcher
     {
         void Execute();
         Task Completion { get; }
-        bool HasExecuted { get; }
+        bool IsStarted { get; }
+        bool IsCompleted { get; }
     }
 
 

@@ -44,6 +44,9 @@ namespace Stugo.Threading.Dispatcher
 
         private void Process()
         {
+            // make sure task continuations etc get re-queued on dispatcher
+            SynchronizationContext.SetSynchronizationContext(new DispatcherSynchronizationContext(this));
+
             while (!disposed)
             {
                 Dequeue()?.Execute();

@@ -50,11 +50,15 @@
     <Compile Include="Async\AwaitableAutoResetEvent.cs" />
     <Compile Include="Async\AwaitableCriticalSection.cs" />
     <Compile Include="Async\AwaitableManualResetEvent.cs" />
+    <Compile Include="Dispatcher\AsyncDelegateOperation.cs" />
+    <Compile Include="Dispatcher\DelegateOperation.cs" />
     <Compile Include="Dispatcher\DispatcherExtensions.cs" />
+    <Compile Include="Dispatcher\DispatcherSynchronizationContext.cs" />
     <Compile Include="Dispatcher\IOperation.cs" />
     <Compile Include="Dispatcher\IOperationDispatcher.cs" />
     <Compile Include="Dispatcher\OperationBase.cs" />
     <Compile Include="Dispatcher\OperationDispatcher.cs" />
+    <Compile Include="Dispatcher\SendOrPostCallbackOperation.cs" />
     <Compile Include="Properties\GlobalAssemblyInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\VersionInfo.cs" />

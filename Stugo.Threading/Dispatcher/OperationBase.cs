@@ -7,30 +7,40 @@ namespace Stugo.Threading.Dispatcher
     public abstract class OperationBase : IOperation
     {
         private readonly TaskCompletionSource<None> completion = new TaskCompletionSource<None>();
-        private int hasExecuted;
+        private int hasStarted;
 
         public Task Completion => completion.Task;
-        public bool HasExecuted => hasExecuted != 0;
+        public bool IsStarted => hasStarted != 0;
+        public bool IsCompleted => Completion.IsCompleted || Completion.IsCanceled || Completion.IsFaulted;
 
 
         public void Execute()
         {
-            if (Interlocked.CompareExchange(ref hasExecuted, 1, 0) != 0)
+            if (Interlocked.CompareExchange(ref hasStarted, 1, 0) != 0)
                 throw new InvalidOperationException("The operation has already been executed");
 
+            StartAsyncOperation(() => completion.SetResult(None.Value), e => completion.SetException(e));
+        }
+
+
+        protected virtual void StartAsyncOperation(Action complete, Action<Exception> fail)
+        {
             try
             {
-                ExecuteInternal();
-                completion.SetResult(None.Value);
+                ExecuteOverride();
+                complete();
             }
             catch (Exception e)
             {
-                completion.SetException(e);
+                fail(e);
             }
         }
 
 
-        protected abstract void ExecuteInternal();
+        protected virtual void ExecuteOverride()
+        {
+            throw new NotImplementedException();
+        }
     }
 
 
@@ -44,7 +54,7 @@ namespace Stugo.Threading.Dispatcher
         {
             get
             {
-                if (!HasExecuted)
+                if (!IsCompleted)
                     throw new InvalidOperationException("The operation has not been executed");
                 return result;
             }

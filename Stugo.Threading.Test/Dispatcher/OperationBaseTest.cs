@@ -12,10 +12,10 @@ namespace Stugo.Threading.Test.Dispatcher
             var operation = new TestOperation();
 
             Assert.False(operation.Completion.IsCompleted);
-            Assert.False(operation.HasExecuted);
+            Assert.False(operation.IsStarted);
             operation.Execute();
             Assert.True(operation.Completion.IsCompleted);
-            Assert.True(operation.HasExecuted);
+            Assert.True(operation.IsStarted);
         }
 
 

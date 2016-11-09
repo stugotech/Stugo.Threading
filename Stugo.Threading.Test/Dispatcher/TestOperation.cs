@@ -8,7 +8,7 @@ namespace Stugo.Threading.Test.Dispatcher
         public bool ThrowException { get; set; }
         public int ExecutedCount { get; private set; }
 
-        protected override void ExecuteInternal()
+        protected override void ExecuteOverride()
         {
             if (ThrowException)
                 throw new Exception("ThrowException set");
