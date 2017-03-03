@@ -1,6 +1,16 @@
 @echo off
 
-set ARGS=/t:clean,build
-if not [%1]==[] set ARGS=%*
+if "%1"=="" goto usage
 
-"C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe" /p:Configuration=Release %ARGS% "Stugo.Threading.sln"
+set PROJECT_NAME=Stugo.Threading
+set APPVEYOR_BUILD_VERSION=%1
+
+
+msbuild /p:Configuration=net45 /m
+mkdir %PROJECT_NAME%\bin\nupkg
+nuget pack %PROJECT_NAME%\%PROJECT_NAME%.nuspec -OutputDirectory %PROJECT_NAME%\bin\nupkg\ -Version "%APPVEYOR_BUILD_VERSION%"
+
+goto :eof
+
+:usage
+echo "build.cmd <version>"
